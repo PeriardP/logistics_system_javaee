@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Logistic_process</name>
+	<name>Sistema-de-logistica</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -38,6 +38,7 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.jboss.tools.jst.web.kb.kbnature</nature>
 		<nature>org.jboss.tools.cdi.core.cdinature</nature>
+		<nature>org.jboss.tools.jsf.jsfnature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>
