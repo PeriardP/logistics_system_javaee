@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Menu Principal</title>
+</h:head>
+<body>
+<h:messages />
+
+<div style="text-align:center; background-color:#2c3e50; color:#ffffff; padding:15px;">
+	<h1>Sistema de Logística</h1>
+</div>
+
+<h:form>
+	<h:panelGrid columns="1" cellpadding="10">
+		<h:outputLink value="clientes.xhtml">
+			<h:outputText value="Gerenciar Clientes" />
+		</h:outputLink>
+
+		<h:outputLink value="entregadores.xhtml">
+			<h:outputText value="Gerenciar Entregadores" />
+		</h:outputLink>
+
+		<h:outputLink value="encomendas.xhtml">
+			<h:outputText value="Registrar Encomendas" />
+		</h:outputLink>
+
+		<h:outputLink value="relatorioEntregas.xhtml">
+			<h:outputText value="Relatórios de Entregas" />
+		</h:outputLink>
+	</h:panelGrid>
+</h:form>
+
+<div style="text-align:center; background-color:#2c3e50; color:#ffffff; padding:10px; margin-top:30px;">
+	<h:outputText value="Desenvolvido por: Diogo Barboza da Silva - Pedro Periard Silveira" />
+</div>
+
+</body>
+</html>
