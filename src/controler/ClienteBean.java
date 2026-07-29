@@ -3,8 +3,6 @@ package controler;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -29,7 +27,7 @@ public class ClienteBean {
 	}
 	
 	
-	
+	 
 	
 	
 	
