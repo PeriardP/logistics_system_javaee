@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gerenciar Entregadores</title>
+</h:head>
+
+<h:body>
+   
+    <div style="margin-bottom: 15px;">
+        <p:button outcome="index.xhtml" value="Voltar para a Tela Inicial" icon="pi pi-home" />
+    </div>
+
+    <h:form id="formEntregador">
+        <p:messages id="mensagens" autoUpdate="true" />
+
+        <h:panelGrid columns="2">
+            
+           
+            <p:outputLabel value="Nome:" />
+            <p:inputText value="#{entregadorBean.entregador.nome}" 
+                         required="true" requiredMessage="O Nome é obrigatório!" />
+
+            <p:outputLabel value="Celular:" />
+            <p:inputMask mask="(99) 99999-9999" 
+                         value="#{entregadorBean.entregador.celular}" 
+                         required="true" requiredMessage="O Celular é obrigatório!" />
+
+          
+            <p:outputLabel value="CNH:" />
+            <p:inputText value="#{entregadorBean.entregador.cnh}" 
+                         required="true" requiredMessage="A CNH é obrigatória!" />
+
+            <p:outputLabel value="Categoria CNH:" />
+            
+            <h:selectOneMenu value="#{entregadorBean.entregador.categoriaCnh}" 
+                             required="true" requiredMessage="A Categoria da CNH é obrigatória!">
+                <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="A" itemValue="A" />
+                <f:selectItem itemLabel="B" itemValue="B" />
+                <f:selectItem itemLabel="AB" itemValue="AB" />
+            </h:selectOneMenu>
+
+            <!-- CAMPOS DE ENDEREÇO -->
+            <p:outputLabel value="Rua:" />
+            <p:inputText value="#{entregadorBean.entregador.endereco.rua}" 
+                         required="true" requiredMessage="A Rua é obrigatória!" />
+
+            <p:outputLabel value="Número:" />
+            <p:inputText value="#{entregadorBean.entregador.endereco.numero}" 
+                         required="true" requiredMessage="O Número é obrigatório!" />
+
+            <p:outputLabel value="Bairro:" />
+            <p:inputText value="#{entregadorBean.entregador.endereco.bairro}" 
+                         required="true" requiredMessage="O Bairro é obrigatório!" />
+
+            <p:outputLabel value="Cidade:" />
+            <p:inputText value="#{entregadorBean.entregador.endereco.cidade}" 
+                         required="true" requiredMessage="A Cidade é obrigatória!" />
+
+        </h:panelGrid>
+
+        <br/>
+        
+        <p:commandButton value="Salvar" action="#{entregadorBean.salvar}" update="@form" />
+        <p:commandButton value="Novo/Limpar" action="#{entregadorBean.novo}" immediate="true" update="@form" />
+        
+        <br/><br/>
+        
+        
+        <h:panelGrid columns="3">
+            <p:outputLabel value="Pesquisar por Nome:" />
+            <p:inputText value="#{entregadorBean.texto}" />
+            <p:commandButton value="Buscar" action="#{entregadorBean.pesquisarEntregador}" update="tabelaEntregadores" />
+        </h:panelGrid>
+
+        <br/>
+
+       
+        <p:dataTable id="tabelaEntregadores" value="#{entregadorBean.entregadores}" var="e" emptyMessage="Nenhum entregador encontrado.">
+            
+            <p:column headerText="Nome">
+                <h:outputText value="#{e.nome}" />
+            </p:column>
+            
+            <p:column headerText="Celular">
+                <h:outputText value="#{e.celular}" />
+            </p:column>
+
+            <p:column headerText="CNH">
+                <h:outputText value="#{e.cnh}" />
+            </p:column>
+
+            <p:column headerText="Categoria">
+                <h:outputText value="#{e.categoriaCnh}" />
+            </p:column>
+
+            <p:column headerText="Cidade">
+                <h:outputText value="#{e.endereco.cidade}" />
+            </p:column>
+            
+            <p:column headerText="Ações">
+                <p:commandButton value="Editar" action="#{entregadorBean.editar(e)}" update="@form" />
+                <p:commandButton value="Excluir" action="#{entregadorBean.excluir(e)}" update="@form" />
+            </p:column>
+            
+        </p:dataTable>
+        
+    </h:form>
+</h:body>
+</html>
