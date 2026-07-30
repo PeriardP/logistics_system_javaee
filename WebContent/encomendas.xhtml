@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Registrar Encomendas</title>
+</h:head>
+
+<h:body>
+    <!-- link para retornar à página inicial -->
+    <div style="margin-bottom: 15px;">
+        <p:button outcome="Menu.xhtml" value="Voltar para a Tela Inicial" icon="pi pi-home" />
+    </div>
+
+    <h:form id="formEncomenda">
+        <p:messages id="mensagens" autoUpdate="true" />
+
+        <h:panelGrid columns="2">
+            
+            <p:outputLabel value="Código de Rastreio:" />
+            <p:inputText value="#{encomendaBean.encomenda.codigoRastreio}" 
+                         required="true" requiredMessage="O Código de Rastreio é obrigatório!" />
+
+            <p:outputLabel value="Valor (R$):" />
+            <p:inputText value="#{encomendaBean.encomenda.valor}" 
+                         required="true" requiredMessage="O Valor é obrigatório!">
+                <!-- Formata para aceitar números quebrados -->
+                <f:convertNumber pattern="#0.00" />
+            </p:inputText>
+
+            <p:outputLabel value="Cliente Destinatário:" />
+            <h:selectOneMenu value="#{encomendaBean.idClienteSelecionado}" 
+                             required="true" requiredMessage="Selecione um Cliente!">
+                <f:selectItem itemLabel="Selecione um cliente..." itemValue="" noSelectionOption="true" />
+                <!-- Puxa a lista de clientes do banco -->
+                <f:selectItems value="#{encomendaBean.clientes}" var="c" 
+                               itemLabel="#{c.nome} (CPF: #{c.cpf})" itemValue="#{c.id}" />
+            </h:selectOneMenu>
+
+            <p:outputLabel value="Entregador Responsável:" />
+            <h:selectOneMenu value="#{encomendaBean.idEntregadorSelecionado}" 
+                             required="true" requiredMessage="Selecione um Entregador!">
+                <f:selectItem itemLabel="Selecione um entregador..." itemValue="" noSelectionOption="true" />
+                <!-- Puxa a lista de entregadores do banco -->
+                <f:selectItems value="#{encomendaBean.entregadores}" var="e" 
+                               itemLabel="#{e.nome} (CNH: #{e.cnh})" itemValue="#{e.id}" />
+            </h:selectOneMenu>
+
+        </h:panelGrid>
+
+        <br/>
+        
+        <p:commandButton value="Salvar" action="#{encomendaBean.salvar}" update="@form" />
+        <p:commandButton value="Novo/Limpar" action="#{encomendaBean.novo}" immediate="true" update="@form" />
+        
+        <br/><br/>
+
+       
+        <p:dataTable id="tabelaEncomendas" value="#{encomendaBean.encomendas}" var="enc" emptyMessage="Nenhuma encomenda registrada.">
+            
+            <p:column headerText="Rastreio">
+                <h:outputText value="#{enc.codigoRastreio}" />
+            </p:column>
+            
+            <p:column headerText="Valor">
+                <h:outputText value="#{enc.valor}">
+                    <f:convertNumber type="currency" currencySymbol="R$" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Cliente">
+                <h:outputText value="#{enc.cliente.nome}" />
+            </p:column>
+
+            <p:column headerText="Entregador">
+                <h:outputText value="#{enc.entregador.nome}" />
+            </p:column>
+
+            
+            <p:column headerText="Endereço de Entrega">
+                <h:outputText value="#{enc.cliente.endereco.rua}, #{enc.cliente.endereco.numero} - #{enc.cliente.endereco.bairro}, #{enc.cliente.endereco.cidade}" />
+            </p:column>
+            
+            <p:column headerText="Ações">
+                <p:commandButton value="Editar" action="#{encomendaBean.editar(enc)}" update="@form" />
+                <p:commandButton value="Excluir" action="#{encomendaBean.excluir(enc)}" update="@form" />
+            </p:column>
+            
+        </p:dataTable>
+        
+    </h:form>
+</h:body>
+</html>
