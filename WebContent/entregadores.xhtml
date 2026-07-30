@@ -9,9 +9,9 @@
 </h:head>
 
 <h:body>
-   
+    
     <div style="margin-bottom: 15px;">
-        <p:button outcome="index.xhtml" value="Voltar para a Tela Inicial" icon="pi pi-home" />
+        <p:button outcome="Menu.xhtml" value="Voltar para a Tela Inicial" icon="pi pi-home" />
     </div>
 
     <h:form id="formEntregador">
@@ -19,7 +19,6 @@
 
         <h:panelGrid columns="2">
             
-           
             <p:outputLabel value="Nome:" />
             <p:inputText value="#{entregadorBean.entregador.nome}" 
                          required="true" requiredMessage="O Nome é obrigatório!" />
@@ -29,13 +28,11 @@
                          value="#{entregadorBean.entregador.celular}" 
                          required="true" requiredMessage="O Celular é obrigatório!" />
 
-          
             <p:outputLabel value="CNH:" />
             <p:inputText value="#{entregadorBean.entregador.cnh}" 
                          required="true" requiredMessage="A CNH é obrigatória!" />
 
             <p:outputLabel value="Categoria CNH:" />
-            
             <h:selectOneMenu value="#{entregadorBean.entregador.categoriaCnh}" 
                              required="true" requiredMessage="A Categoria da CNH é obrigatória!">
                 <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
@@ -44,7 +41,6 @@
                 <f:selectItem itemLabel="AB" itemValue="AB" />
             </h:selectOneMenu>
 
-            <!-- CAMPOS DE ENDEREÇO -->
             <p:outputLabel value="Rua:" />
             <p:inputText value="#{entregadorBean.entregador.endereco.rua}" 
                          required="true" requiredMessage="A Rua é obrigatória!" />
@@ -65,11 +61,11 @@
 
         <br/>
         
+       
         <p:commandButton value="Salvar" action="#{entregadorBean.salvar}" update="@form" />
         <p:commandButton value="Novo/Limpar" action="#{entregadorBean.novo}" immediate="true" update="@form" />
         
         <br/><br/>
-        
         
         <h:panelGrid columns="3">
             <p:outputLabel value="Pesquisar por Nome:" />
@@ -79,7 +75,6 @@
 
         <br/>
 
-       
         <p:dataTable id="tabelaEntregadores" value="#{entregadorBean.entregadores}" var="e" emptyMessage="Nenhum entregador encontrado.">
             
             <p:column headerText="Nome">
