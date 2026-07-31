@@ -24,12 +24,10 @@ public class EncomendaBean {
     private Encomenda encomenda;
     private List<Encomenda> encomendas = new ArrayList<Encomenda>();
     private Boolean edicao = false;
-
     
     private List<Cliente> clientes = new ArrayList<Cliente>();
     private List<Entregador> entregadores = new ArrayList<Entregador>();
 
-   
     private Long idClienteSelecionado;
     private Long idEntregadorSelecionado;
 
@@ -48,7 +46,6 @@ public class EncomendaBean {
 
     @PostConstruct
     public void iniciar() {
-       
         clientes = clienteService.pesquisarPorNome("");
         entregadores = entregadorService.pesquisarPorNome("");
         
@@ -56,19 +53,17 @@ public class EncomendaBean {
     }
 
     public void salvar() {
-        // Pega o ID que veio da tela e acha o Cliente correspondente na lista
         if (idClienteSelecionado != null) {
             Cliente c = clientes.stream().filter(x -> x.getId().equals(idClienteSelecionado)).findFirst().orElse(null);
             encomenda.setCliente(c);
         }
         
-        // Pega o ID que veio da tela e acha o Entregador correspondente na lista
         if (idEntregadorSelecionado != null) {
             Entregador e = entregadores.stream().filter(x -> x.getId().equals(idEntregadorSelecionado)).findFirst().orElse(null);
             encomenda.setEntregador(e);
         }
 
-        //Validação de preenchimento obrigatório
+        //  preenchimento obrigatório
         if (encomenda.getCliente() == null || encomenda.getEntregador() == null) {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Selecione um Cliente e um Entregador!"));
@@ -101,7 +96,6 @@ public class EncomendaBean {
     public void editar(Encomenda enc) {
         this.encomenda = enc;
         this.edicao = true;
-        
         
         this.idClienteSelecionado = enc.getCliente().getId();
         this.idEntregadorSelecionado = enc.getEntregador().getId();
