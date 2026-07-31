@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Relatórios de Entregas</title>
+</h:head>
+
+<h:body>
+    <div style="margin-bottom: 15px;">
+        <p:button outcome="Menu.xhtml" value="Voltar para a Tela Inicial" icon="pi pi-home" />
+    </div>
+
+    <h:form id="formRelatorio">
+        <h:panelGrid columns="2">
+            
+            <p:outputLabel value="Entregador Responsável:" />
+            <h:selectOneMenu value="#{relatorioBean.idEntregadorFiltro}">
+                <f:selectItem itemLabel="Todos os Entregadores" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{relatorioBean.entregadores}" var="e" 
+                               itemLabel="#{e.nome}" itemValue="#{e.id}" />
+            </h:selectOneMenu>
+
+            <p:outputLabel value="Cidade do Cliente (Filtro por nome):" />
+            <p:inputText value="#{relatorioBean.cidadeFiltro}" />
+
+            <p:outputLabel value="Encomendas de valor menor que (R$):" />
+            <p:inputText value="#{relatorioBean.valorMaximoFiltro}">
+                <f:convertNumber pattern="#0.00" />
+            </p:inputText>
+            
+        </h:panelGrid>
+
+        <br/>
+        
+        <p:commandButton value="Filtrar Relatório" action="#{relatorioBean.pesquisar}" update="tabelaRelatorio" />
+        <p:commandButton value="Limpar Filtros" action="#{relatorioBean.limpar}" update="@form" />
+        
+        <br/><br/>
+
+        <p:dataTable id="tabelaRelatorio" value="#{relatorioBean.encomendas}" var="enc" emptyMessage="Nenhuma encomenda encontrada com estes critérios.">
+            
+            <p:column headerText="Cliente">
+                <h:outputText value="#{enc.cliente.nome}" />
+            </p:column>
+            
+            <p:column headerText="Endereço">
+                <h:outputText value="#{enc.cliente.endereco.cidade} - #{enc.cliente.endereco.bairro} (#{enc.cliente.endereco.rua}, #{enc.cliente.endereco.numero})" />
+            </p:column>
+
+            <p:column headerText="Entregador">
+                <h:outputText value="#{enc.entregador.nome}" />
+            </p:column>
+
+            <p:column headerText="Rastreio">
+                <h:outputText value="#{enc.codigoRastreio}" />
+            </p:column>
+            
+            <p:column headerText="Valor (R$)">
+                <h:outputText value="#{enc.valor}">
+                    <f:convertNumber type="currency" currencySymbol="R$" />
+                </h:outputText>
+            </p:column>
+            
+        </p:dataTable>
+        
+    </h:form>
+</h:body>
+</html>
