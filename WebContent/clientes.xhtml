@@ -9,11 +9,12 @@
 </h:head>
 
 <h:body>
-<div style="margin-bottom: 15px;">
+    <div style="margin-bottom: 15px;">
         <p:button outcome="Menu.xhtml" value="Voltar para a Tela Inicial" icon="pi pi-home" />
     </div>
+    
     <h:form id="formCliente">
-       
+        
         <p:messages id="mensagens" autoUpdate="true" />
 
         <h:panelGrid columns="2">
@@ -23,19 +24,16 @@
                          required="true" requiredMessage="O Nome é obrigatório!" />
 
             <p:outputLabel value="CPF:" />
-            
             <p:inputMask mask="999.999.999-99" 
                          value="#{clienteBean.cliente.cpf}" 
                          disabled="#{clienteBean.edicao}" 
                          required="true" requiredMessage="O CPF é obrigatório!" />
 
             <p:outputLabel value="Celular:" />
-            
             <p:inputMask mask="(99) 99999-9999" 
                          value="#{clienteBean.cliente.celular}" 
                          required="true" requiredMessage="O Celular é obrigatório!" />
 
-           
             <p:outputLabel value="Rua:" />
             <p:inputText value="#{clienteBean.cliente.endereco.rua}" 
                          required="true" requiredMessage="A Rua é obrigatória!" />
@@ -55,13 +53,11 @@
         </h:panelGrid>
 
         <br/>
-        
  
         <p:commandButton value="Salvar" action="#{clienteBean.salvar}" update="@form" />
-        <p:commandButton value="Novo/Limpar" action="#{clienteBean.novo}" immediate="true" update="@form" />
+		<p:commandButton value="Novo/Limpar" action="#{clienteBean.novo}" process="@this" update="@form" resetValues="true" />        
         
         <br/><br/>
-        
         
         <h:panelGrid columns="3">
             <p:outputLabel value="Pesquisar por Nome:" />
@@ -71,10 +67,9 @@
 
         <br/>
 
-    
         <p:dataTable id="tabelaClientes" value="#{clienteBean.clientes}" var="c" emptyMessage="Nenhum cliente encontrado.">
             
-            <p:column headerText="Nome">
+            <p:column headerText="Nome" sortBy="#{c.nome}">
                 <h:outputText value="#{c.nome}" />
             </p:column>
             
@@ -90,9 +85,9 @@
                 <h:outputText value="#{c.endereco.cidade}" />
             </p:column>
             
-            <p:column headerText="Ações">
-                <p:commandButton value="Editar" action="#{clienteBean.editar(c)}" update="@form" />
-                <p:commandButton value="Excluir" action="#{clienteBean.excluir(c)}" update="@form" />
+          <p:column headerText="Ações">
+                <p:commandButton value="Editar" action="#{clienteBean.editar(c)}" process="@this" update="@form" />
+                <p:commandButton value="Excluir" action="#{clienteBean.excluir(c)}" process="@this" update="@form" />
             </p:column>
             
         </p:dataTable>

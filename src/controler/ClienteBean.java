@@ -26,12 +26,10 @@ public class ClienteBean {
     @EJB
     private ClienteService clienteService;
 
-    // Tudo começa limpo
     public ClienteBean() {
         novo();
     }
 
-    // Carrega a tabela ao abrir 
     @PostConstruct
     public void iniciar() {
         pesquisarCliente();
@@ -53,12 +51,10 @@ public class ClienteBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cliente cadastrado com sucesso!"));
         }
         
-        
         novo(); 
         pesquisarCliente(); 
     } 
         
-    
     public void pesquisarCliente() {
         if (texto == null) {
             texto = ""; 
@@ -85,36 +81,12 @@ public class ClienteBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cliente excluído!"));
     }
     
-   
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-
-    public Boolean getEdicao() {
-        return edicao;
-    }
-
-    public void setEdicao(Boolean edicao) {
-        this.edicao = edicao;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+    public List<Cliente> getClientes() { return clientes; }
+    public void setClientes(List<Cliente> clientes) { this.clientes = clientes; }
+    public Boolean getEdicao() { return edicao; }
+    public void setEdicao(Boolean edicao) { this.edicao = edicao; }
+    public String getTexto() { return texto; }
+    public void setTexto(String texto) { this.texto = texto; }
 }

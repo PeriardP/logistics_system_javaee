@@ -81,36 +81,12 @@ public class EntregadorBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Entregador excluído!"));
     }
     
-   
-    public Entregador getEntregador() {
-        return entregador;
-    }
-
-    public void setEntregador(Entregador entregador) {
-        this.entregador = entregador;
-    }
-
-    public List<Entregador> getEntregadores() {
-        return entregadores;
-    }
-
-    public void setEntregadores(List<Entregador> entregadores) {
-        this.entregadores = entregadores;
-    }
-
-    public Boolean getEdicao() {
-        return edicao;
-    }
-
-    public void setEdicao(Boolean edicao) {
-        this.edicao = edicao;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
+    public Entregador getEntregador() { return entregador; }
+    public void setEntregador(Entregador entregador) { this.entregador = entregador; }
+    public List<Entregador> getEntregadores() { return entregadores; }
+    public void setEntregadores(List<Entregador> entregadores) { this.entregadores = entregadores; }
+    public Boolean getEdicao() { return edicao; }
+    public void setEdicao(Boolean edicao) { this.edicao = edicao; }
+    public String getTexto() { return texto; }
+    public void setTexto(String texto) { this.texto = texto; }
 }

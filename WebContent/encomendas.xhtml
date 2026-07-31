@@ -53,7 +53,7 @@
         <br/>
         
         <p:commandButton value="Salvar" action="#{encomendaBean.salvar}" update="@form" />
-        <p:commandButton value="Novo/Limpar" action="#{encomendaBean.novo}" immediate="true" update="@form" />
+        <p:commandButton value="Novo/Limpar" action="#{encomendaBean.novo}" process="@this" update="@form" resetValues="true" />
         
         <br/><br/>
 
@@ -84,8 +84,8 @@
             </p:column>
             
             <p:column headerText="Ações">
-                <p:commandButton value="Editar" action="#{encomendaBean.editar(enc)}" update="@form" />
-                <p:commandButton value="Excluir" action="#{encomendaBean.excluir(enc)}" update="@form" />
+                <p:commandButton value="Editar" action="#{encomendaBean.editar(enc)}" process="@this" update="@form" />
+                <p:commandButton value="Excluir" action="#{encomendaBean.excluir(enc)}" process="@this" update="@form" />
             </p:column>
             
         </p:dataTable>

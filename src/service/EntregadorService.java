@@ -17,7 +17,6 @@ public class EntregadorService extends GenericService<Entregador> {
 
     @PersistenceContext
     private EntityManager em;
-
     
     public EntregadorService() {
         super(Entregador.class);
@@ -29,13 +28,11 @@ public class EntregadorService extends GenericService<Entregador> {
         CriteriaQuery<Entregador> cq = cb.createQuery(Entregador.class);
         Root<Entregador> root = cq.from(Entregador.class);
 
-        
         if (texto != null && !texto.trim().isEmpty()) {
             Predicate restricoes = cb.like(root.get("nome"), "%" + texto + "%");
             cq.where(restricoes);
         }
 
-        
         cq.orderBy(cb.asc(root.get("nome")));
 
         TypedQuery<Entregador> query = em.createQuery(cq);
@@ -45,7 +42,6 @@ public class EntregadorService extends GenericService<Entregador> {
     // Verificar se o entregador possui encomendas 
     public boolean possuiEncomendas(Long idEntregador) {
         try {
-            
             Long count = em.createQuery(
                 "SELECT COUNT(e) FROM Encomenda e WHERE e.entregador.id = :idEntregador", Long.class)
                 .setParameter("idEntregador", idEntregador)
@@ -53,7 +49,6 @@ public class EntregadorService extends GenericService<Entregador> {
             
             return count > 0;
         } catch (Exception e) {
-            
             return false; 
         }
     }
